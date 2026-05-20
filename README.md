@@ -1,8 +1,18 @@
+[![teamspeak3-client](https://snapcraft.io/teamspeak3-client/badge.svg)](https://snapcraft.io/teamspeak3-client)
+
 # (UNOFFICIAL) TeamSpeak 3 Client Snap
 
 This is an **UNOFFICIAL** snap for the TeamSpeak3 Voice Communication Client.
 
 TeamSpeak3 is a Voice over Internet Protocol (VoIP) application that allows users to speak on public Internet servers. It's widely used for gaming, business communication, and social purposes.
+
+## Installing the Snap
+
+```
+sudo snap install teamspeak3-client
+```
+
+## Screenshot
 
 ![Screenshot](./img/screenshot-small.png)
 
@@ -11,12 +21,6 @@ TeamSpeak3 is a Voice over Internet Protocol (VoIP) application that allows user
 If you experience any issues with this snap, [open an issue](https://github.com/dviererbe/teamspeak3-client-snap/issues/new), but please be aware that I can only try fixing issues related to the snap packaging. I can not fix any issues with the TeamSpeak 3 Client software itself. In these cases you should [contact](https://teamspeak.com/en/more/contact/) the developers directly.
 
 Please also take into consideration that I packaged this software to use it myself. I will try doing my best in my free time to resolve issues with this snap, but I do not get paid to maintain this snap and I am not commited to make any promises/guarantees. Feel free to send pull requests or fork this repo if you think you can do better ;)
-
-## Installing the Snap
-
-```
-sudo snap install teamspeak3-client
-```
 
 ## Building the Snap
 
