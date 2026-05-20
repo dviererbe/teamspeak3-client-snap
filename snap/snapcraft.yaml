@@ -1,0 +1,83 @@
+name: teamspeak3-client
+title: Unofficial TeamSpeak 3 Client
+version: 3.6.2
+summary: Unofficial TeamSpeak3 Voice Communication Client
+description: |
+  TeamSpeak3 is a Voice over Internet Protocol (VoIP) application that allows
+  users to speak on public Internet servers. It's widely used for gaming,
+  business communication, and social purposes.
+
+  **NOTE:** This is an unofficial snap!
+icon: snap/gui/teamspeak3-client.png
+
+website: https://www.teamspeak.com/en/
+source-code: https://github.com/dviererbe/teamspeak3-client-snap.git
+issues: https://github.com/dviererbe/teamspeak3-client-snap/issues
+
+base: core24
+confinement: strict
+grade: stable
+
+platforms:
+  amd64:
+    build-on:
+      - amd64
+    build-for:
+      - amd64
+
+parts:
+  teamspeak3-client:
+    plugin: dump
+    source: ./assets
+    build-packages:
+      - wget
+    stage-packages:
+      - libxml2
+      - libpci3
+      - libqt5waylandclient5
+    override-pull: |
+      FILE_NAME=TeamSpeak3-Client-linux_amd64-${CRAFT_PROJECT_VERSION}.run
+      FILE_URL=https://files.teamspeak-services.com/releases/client/${CRAFT_PROJECT_VERSION}/${FILE_NAME}
+      FILE_HASH="59f110438971a23f904a700e7dd0a811cf99d4e6b975ba3aa45962d43b006422"
+
+      mkdir teamspeak3-client && cd teamspeak3-client
+      wget "$FILE_URL"
+      echo "$FILE_HASH  $FILE_NAME" | sha256sum -c
+      sh $FILE_NAME --tar -xf
+      craftctl default
+    organize:
+      teamspeak3-client: opt/teamspeak3-client
+      teamspeak3-client.bash: opt/teamspeak3-client/teamspeak3-client
+      teamspeak3-client-license.txt: opt/teamspeak3-client/license.txt
+    override-prime: |
+      craftctl default
+  
+      cd "$CRAFT_PRIME/opt/teamspeak3-client"
+      
+      # Fix permissions
+      find -type d | xargs chmod 755
+      find -type f | xargs chmod 644
+      find -name '*.so*' | xargs chmod 755
+      chmod +x ts3client* teamspeak3-client package_inst QtWebEngineProcess
+
+apps:
+  teamspeak3-client:
+    command: opt/teamspeak3-client/teamspeak3-client
+    extensions: [ gnome ]
+    plugs:
+      - audio-playback
+      - audio-record
+      - network
+      - removable-media
+
+lint:
+  ignore:
+    - metadata:
+      # The TeamSpeak 3 Client license is propriatray and the license field
+      # currently only supports SPDX 2.1 expressions.
+      - license
+      # I strongly prefer that I am contacted via the issues page.
+      - contact
+    - library:
+      # missing dependency 'libwebp.so.6'; this dependency is not available in noble
+      - opt/teamspeak3-client/imageformats/libqwebp.so

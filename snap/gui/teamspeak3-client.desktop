@@ -1,0 +1,13 @@
+[Desktop Entry]
+Comment=Unofficial TeamSpeak3 Voice Communication Client
+Exec=teamspeak3-client %u
+Icon=${SNAP}/meta/gui/teamspeak3-client.png
+Encoding=UTF-8
+Name=TeamSpeak 3
+GenericName=TeamSpeak
+MimeType=x-scheme-handler/ts3server;
+StartupNotify=true
+Terminal=false
+Type=Application
+Categories=Network;Application;
+StartupWMClass=TeamSpeak 3
