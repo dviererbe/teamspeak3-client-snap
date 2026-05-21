@@ -24,7 +24,7 @@ Please also take into consideration that I packaged this software to use it myse
 
 ## Building the Snap
 
-0. (Prerequisite) install Snapcraft:
+0. (prerequisite) install Snapcraft:
    ```
    sudo snap install snapcraft
    ```
@@ -32,7 +32,7 @@ Please also take into consideration that I packaged this software to use it myse
    ```
    snapcraft clean
    ```
-2. build the Snap:
+2. build the Snap (this may take a few minutes):
    ```
    snapcraft pack
    ```
