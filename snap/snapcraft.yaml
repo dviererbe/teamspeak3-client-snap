@@ -68,6 +68,7 @@ apps:
       - audio-playback
       - audio-record
       - network
+      - home
       - removable-media
 
 lint:
